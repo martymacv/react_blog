@@ -14,3 +14,36 @@ The React Compiler is not enabled on this template because of its impact on dev 
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+# Функциональные задания
+## ФЗ-1 | Профиль пользователя
+Профиль пользователя должен быть реализован как отдельный компонент-страница в виде формы для отправки данных на сервер.
+При переходе по url /profile/ в форму должны автоматически подгружаться данные профиля из БД. Реализация через router-loading.
+Далее пользователь должен иметь возможность изменить данные.
+Набор данных профиля должен соответствовать модели Django:
+```
+class Profile(models.Model):
+    """
+    Модель для профиля пользователя
+    """
+    first_name = models.CharField(max_length=20, null=True, blank=True)
+    last_name = models.CharField(max_length=20, null=True, blank=True)
+    profession = models.CharField(max_length=50, null=True, blank=True)
+    short_desc = models.CharField(max_length=300, null=True, blank=True)
+    full_desc = models.TextField(null=True, blank=True)
+
+    wallpaper = models.ImageField(upload_to='wallpapers/', null=True, blank=True)
+    avatar = models.ImageField(upload_to=user_avatar_path, null=True, blank=True)
+
+    link_to_instagram = models.URLField(null=True, blank=True)
+    link_to_vk = models.URLField(null=True, blank=True)
+
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        primary_key=True,
+        related_name='profiles'
+    )
+    
+    # остальная логика
+```
