@@ -2,7 +2,7 @@ import Span from "../generals/Span"
 import { useState } from "react";
 import imageCompression from 'browser-image-compression';
 
-function Avatar({ variant = "avatar", changeAvatar, src, ...props }) {
+function Wallpaper({ variant = "wallpaper", changeWallpaper, src, ...props }) {
     const [previewUrl, setPreviewUrl] = useState(null);
     const [loading, setLoading] = useState(false);
     // const [compressedFile, setCompressedFile] = useState(null);
@@ -19,13 +19,13 @@ function Avatar({ variant = "avatar", changeAvatar, src, ...props }) {
             const compressedFile = await imageCompression(file, options);
             const renamedFile = new File([
                 await compressedFile.arrayBuffer()],
-                `avatar.${file.name.split('.')[1]}`,
+                `wallpaper.${file.name.split('.')[1]}`,
                 {type: file.type}
             )
             const renamedUrl = URL.createObjectURL(renamedFile);
             setPreviewUrl(renamedUrl);
-            if (changeAvatar) {
-                changeAvatar(renamedFile);
+            if (changeWallpaper) {
+                changeWallpaper(renamedFile);
                 console.log(renamedFile)
             }
         } catch (error) {
@@ -47,13 +47,13 @@ function Avatar({ variant = "avatar", changeAvatar, src, ...props }) {
         <label htmlFor={variant} className="flex flex-col gap-4 items-center">
             {previewUrl ? (
                 <img src={previewUrl} alt="Preview"
-                    className="w-50 h-50 object-cover rounded-[50%]"/>
+                    className="w-full max-h-[230px] object-cover"/>
             ) : (
                 <img {...props} src={src} alt="Preview"
-                    className="w-50 h-50 object-cover rounded-[50%]"/>
+                    className="w-full max-h-[230px] object-cover"/>
             )}
             <Span variant="link">
-                Выберите фото профиля
+                Выберите фото обоев
             </Span>
             <input hidden id={variant} 
                 onChange={handleFileChange}
@@ -63,4 +63,4 @@ function Avatar({ variant = "avatar", changeAvatar, src, ...props }) {
     )
 }
 
-export default Avatar;
+export default Wallpaper;

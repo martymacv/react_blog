@@ -34,24 +34,16 @@ function reducer(state, action) {
 
 export default function Sidebar() {
     const [state, dispatch ] = useReducer(reducer, initialState);
-    const {
-        accessToken,
-        logStatus
-    } = useGlobalState();
+    const { userId, accessToken, updatedProfile } = useGlobalState();
 
     useEffect(() => {
-        if (logStatus === "logout") {
-            dispatch({ type: "logout" });
-            return;
-        }
-        
         async function fetchData() {
             try {
                 const response = await fetch(
-                    `${API_BASE_URL}${API_ENDPOINTS.USERS.PROFILE(24)}`, 
+                    `${API_BASE_URL}${API_ENDPOINTS.USERS.PROFILE}`, 
                     API_DATA("GET")
                 );
-                console.log(`${API_BASE_URL}${API_ENDPOINTS.USERS.PROFILE(24)}`)
+                console.log(`${API_BASE_URL}${API_ENDPOINTS.USERS.PROFILE}`)
                 if (!response.ok) {
                     throw new Error(`Failed to fetch! Error: ${response.status}`)
                 }
@@ -62,7 +54,7 @@ export default function Sidebar() {
             }
         };
         fetchData();
-    }, [logStatus])
+    }, [userId, accessToken, updatedProfile])
 
     if (state.status === "loading"){
       return <p className='text-[#dededeff]'>Loading data, please wait...</p>
@@ -70,29 +62,36 @@ export default function Sidebar() {
     if (state.status === "error"){
         return <p className='text-[#dededeff]'>Failed to fetch data. Please try again!</p>
     }
-    if (state.status === "logout"){
-        return <p className='text-[#dededeff]'>Please, login...</p>
-    }
 
     return (
         <>
+        {/* {logStatus === "login" ? (
+        <> */}
             <div className='relative flex flex-col items-center justify-start w-full h-[230px] mb-3'>
-                <img className='w-full' src="../src/assets/images/wallpaper.png" alt="wallpaper" />
-                <div className='absolute rounded-full border-2 border-white top-[130px]'>
-                    <img className='w-[98px]' src="../src/assets/images/avatars/avatar.png" alt="avatar" />
+                <img className='w-full'
+                    src={state.profile.wallpaper === null ? (
+                        "../src/assets/images/wallpaper.png"
+                        ) : (`${API_BASE_URL}${state.profile.wallpaper}`
+                    )} alt="wallpaper" />
+                <div className='absolute top-[130px]'>
+                    <img className='w-[98px] h-[98px] border-2 border-white object-cover rounded-full '
+                        src={`${API_BASE_URL}${state.profile.avatar}`} alt="avatar" />
                 </div>
             </div>
             <div className='flex flex-col items-center justify-center'>
                 <h1 className='text-white text-[18px] font-[400] font-roboto'>
                     {state.profile.first_name} {state.profile.last_name}</h1>
-                <p className='text-[#dededeff] text-[14px] font-[300] font-roboto'>Front-end разработчик</p>
+                <p className='text-[#dededeff] text-[14px] font-[300] font-roboto'>
+                    {state.profile.profession}</p>
             </div>
             <div className='flex flex-row gap-4 items-center justify-center pb-3'>
-                <img src="../src/assets/images/instagram.svg" alt="instagram" />
+                <img src={"../src/assets/images/instagram.svg"} alt="instagram" />
                 <img src="../src/assets/images/vk.svg" alt="vk" />
             </div>
             <hr className='border-1 w-[260px] border-[#1c1c1cff]' />
-            <p className='text-white text-[12px] font-[400] leading-[18px] tracking-[0%] text-center py-3 px-5 font-roboto'>Front-end разработчик. Практик верстки сайтов. Созданием сайтов занимаюсь с 2012 года. Работал в нескольких ИТ компаниях и наработал более 10 000 часов в создании сайтов различной сложности.</p>
+            <p className='text-white text-[12px] font-[400] leading-[18px] tracking-[0%] text-center py-3 px-5 font-roboto'>
+                {state.profile.full_desc}
+            </p>
             <hr className='border-1 w-[260px] border-[#1c1c1cff]' />
             <div className='flex flex-row gap-5 items-center justify-center p-4'>
                 <Link to="/profile/1/portfolio">
@@ -100,6 +99,9 @@ export default function Sidebar() {
                 </Link>
                 <button className='text-white font-roboto text-button bg-[#3137c9ff] rounded-full w-[120px] h-[40px]' type='button'>Написать мне</button>
             </div>
+            
+            
+        {/* </>) : (<div></div>)} */}
         </>
     );
 }
