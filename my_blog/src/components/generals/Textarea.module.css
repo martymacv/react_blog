@@ -1,0 +1,55 @@
+* {
+    --valid-color: rgba(75, 255, 0, 0.75);
+    --invalid-color: rgba(255, 75, 0, 0.75);
+}
+
+textarea, input {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #d2d2d2ff;
+    border-bottom: 2px solid;
+}
+
+.requirements {
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: #ffffff37;
+}
+
+.requirements.primary {
+    font-weight: 400;
+}
+
+.requirements.valid {
+    color: var(--valid-color);
+}
+
+.requirements.invalid {
+    color: var(--invalid-color);
+}
+
+.effects:focus {
+    outline: none;
+}
+
+.effects::placeholder {
+    color: #ffffff37;
+}
+
+.primary {
+    border-color: #3f3f3fff;
+}
+
+.primary:focus {
+    border-color: #107effff;
+}
+
+.valid {
+    border-color: var(--valid-color);
+}
+
+.invalid {
+    border-color: var(--invalid-color);
+}

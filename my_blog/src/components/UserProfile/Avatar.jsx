@@ -1,3 +1,4 @@
+import styles from "./Avatar.module.css"
 import Span from "../generals/Span"
 import { useState } from "react";
 import imageCompression from 'browser-image-compression';
@@ -39,26 +40,23 @@ function Avatar({ variant = "avatar", changeAvatar, src, ...props }) {
         const file = event.target.files[0];
         console.log(file);
         if (file && file.type.startsWith('image/')) {
+            setLoading(true);
             compressImage(file);
         }
     };
 
     return (
-        <label htmlFor={variant} className="flex flex-col gap-4 items-center">
-            {previewUrl ? (
-                <img src={previewUrl} alt="Preview"
-                    className="w-50 h-50 object-cover rounded-[50%]"/>
-            ) : (
-                <img {...props} src={src} alt="Preview"
-                    className="w-50 h-50 object-cover rounded-[50%]"/>
-            )}
+        <label htmlFor={variant}>
+            <img src={previewUrl ? previewUrl: src} alt="Preview"
+                className={`${styles.avatar} ${loading ? styles.effects : ''}`}/>
             <Span variant="link">
                 Выберите фото профиля
             </Span>
             <input hidden id={variant} 
                 onChange={handleFileChange}
                 type="file"
-                accept=".jpg,.jpeg,.png,.gif"></input>
+                accept=".jpg,.jpeg,.png,.gif"
+            />
         </label>
     )
 }

@@ -1,13 +1,11 @@
-function Title({ children, variant = "primary", ...props }) {
-    const baseStyles = "font-roboto text-white font-normal"
+import styles from "./Title.module.css"
 
-    const variants = {
-        primary: "text-[21px] leading-[21px] my-7"
-    }
+function Title({ children, variant = "primary", ...props }) {
+    const baseStyles = `${styles.textStyle}`
 
     return (
         <h1
-            className={`${baseStyles} ${variants[variant]}`}
+            className={`${baseStyles} ${styles[variant]}`}
             { ...props }
             >
             {children}
