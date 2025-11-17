@@ -89,8 +89,7 @@ function UserProfile() {
     }
 
     return (
-        <form className={styles.columnFlexbox}
-            onSubmit={handleSubmit}
+        <form onSubmit={handleSubmit}
             encType="multipart/form-data">
             <Title>Профиль</Title>
             <Input name="firstName" type="text"
@@ -102,7 +101,7 @@ function UserProfile() {
             <Input name="email" type="text"
                 fieldValue={user.email}
                 variant="disabled" disabled></Input>
-            <section className={styles.rowFlexbox}>
+            <section>
                 <Link to="/auth/email/"><ActionButton
                     type="button">
                     Изменить Email

@@ -1,4 +1,4 @@
-.columnFlexbox {
+form {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -6,7 +6,7 @@
     max-width: 300px;
 }
 
-.rowFlexbox {
+section {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
