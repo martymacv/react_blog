@@ -14,7 +14,7 @@ function LogoutForm() {
     function handleLotout() {
         handleAccess("");
         handleLogStatus("logout");
-        localStorage.removeItem("auth:access_token");
+        // localStorage.removeItem("auth:access_token");
         console.log(accessToken)
         console.log(logStatus)
         console.log(localStorage.getItem("auth:access_token"))

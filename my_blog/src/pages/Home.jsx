@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 import Stories from "../components/HomePage/Stories";
 import AddPost from "../components/HomePage/AddPost";
@@ -6,8 +6,17 @@ import SimplePost from "../components/HomePage/SimplePost";
 import VideoPost from "../components/HomePage/VideoPost";
 import NormalPost from "../components/HomePage/NormalPost";
 import PageNav from "../components/HomePage/PageNav";
+import { useGlobalState } from "../components/GlobalProvider";
+import { useEffect } from "react";
 
 function Home() {
+  // const { setUserId, accessToken } = useGlobalState();
+  // const { user } = useLoaderData.data;
+
+  // useEffect(() => {
+  //   setUserId(user.pk)
+  // }, [accessToken])
+
   return (
     <div className="">
         <main className="flex flex-col w-full items-center max-w-150">

@@ -68,12 +68,12 @@ export default function Sidebar() {
         {/* {logStatus === "login" ? (
         <> */}
             <div className='relative flex flex-col items-center justify-start w-full h-[230px] mb-3'>
-                <img className='w-full'
+                <img className='w-[300px] max-h-[230px] object-cover object-center'
                     src={state.profile.wallpaper === null ? (
                         "../src/assets/images/wallpaper.png"
                         ) : (`${API_BASE_URL}${state.profile.wallpaper}`
                     )} alt="wallpaper" />
-                <div className='absolute top-[130px]'>
+                <div className='absolute top-[140px]'>
                     <img className='w-[98px] h-[98px] border-2 border-white object-cover rounded-full '
                         src={`${API_BASE_URL}${state.profile.avatar}`} alt="avatar" />
                 </div>
@@ -85,20 +85,26 @@ export default function Sidebar() {
                     {state.profile.profession}</p>
             </div>
             <div className='flex flex-row gap-4 items-center justify-center pb-3'>
-                <img src={"../src/assets/images/instagram.svg"} alt="instagram" />
-                <img src="../src/assets/images/vk.svg" alt="vk" />
+                <a href={state.profile.link_to_instagram} target="_blank">
+                    <img className='w-6'
+                        src={"../../../public/-5027246994669780956/Logo.svg"} alt="instagram" />
+                </a>
+                <a href={state.profile.link_to_vk} target="_blank">
+                    <img className='w-6'
+                        src="../../../public/github-mark-c791e9551fe4/github-mark/github-mark-white.svg" alt="vk" />
+                </a>
             </div>
             <hr className='border-1 w-[260px] border-[#1c1c1cff]' />
             <p className='text-white text-[12px] font-[400] leading-[18px] tracking-[0%] text-center py-3 px-5 font-roboto'>
                 {state.profile.full_desc}
             </p>
-            <hr className='border-1 w-[260px] border-[#1c1c1cff]' />
+            {/* <hr className='border-1 w-[260px] border-[#1c1c1cff]' />
             <div className='flex flex-row gap-5 items-center justify-center p-4'>
                 <Link to="/profile/1/portfolio">
                     <button className='text-white font-roboto text-button bg-[#ed3024ff] rounded-full w-[120px] h-[40px]' type='button'>Мои работы</button>
                 </Link>
                 <button className='text-white font-roboto text-button bg-[#3137c9ff] rounded-full w-[120px] h-[40px]' type='button'>Написать мне</button>
-            </div>
+            </div> */}
             
             
         {/* </>) : (<div></div>)} */}

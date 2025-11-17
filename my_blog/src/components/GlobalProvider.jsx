@@ -3,10 +3,17 @@ import { createContext, useContext, useState } from "react"
 const GlobalContext = createContext();
 
 function GlobalProvider({ children }) {
+    const isLogin = localStorage.getItem("auth:access_token") ? "login" : "logout"
+    const [userId, setUserId] = useState("");
     const [accessToken, setAccessToken] = useState("");
-    const [logStatus, setLogStatus] = useState("logout");
+    const [logStatus, setLogStatus] = useState(isLogin);
+    const [updatedProfile, setUpdatedProfile] = useState(0);
 
-    function handleAccess(token) {
+    function handleUserId(id) {
+        setUserId(id);
+    }
+
+    async function handleAccess(token) {
         setAccessToken(token);
     }
     function handleLogStatus(status) {
@@ -15,8 +22,8 @@ function GlobalProvider({ children }) {
     return (
         <GlobalContext.Provider
             value={{
-                accessToken, logStatus,
-                handleAccess, handleLogStatus
+                accessToken, logStatus, userId, updatedProfile,
+                handleAccess, handleLogStatus, handleUserId, setUpdatedProfile
             }}>
             {children}
         </GlobalContext.Provider>

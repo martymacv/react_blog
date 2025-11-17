@@ -1,3 +1,5 @@
+import { useState } from "react"
+
 function Input({ 
         variant = "primary", 
         requirements = [], 
@@ -14,10 +16,17 @@ function Input({
         invalid: 'border-[#ff2000ff]',
     }
 
+    const [value, setValue] = useState(fieldValue);
+    // console.log(value)
+    function handleInput(event) {
+        setValue(event.target.value)
+    }
+
     return (
         <>
-            <input { ...props }
-                className={`${baseStyles} ${borderStyle} ${placeholderStyle} ${variants[variant]}`}/>
+            <input { ...props } value={value}
+                className={`${baseStyles} ${borderStyle} ${placeholderStyle} ${variants[variant]}`}
+                onChange={handleInput}/>
             <ul>
                 {requirements.map((req) => (
                     <li className={fieldValue ? `font-roboto text-[12px] font-medium ${state[req.type] ? "text-[#00cf00ff]" : "text-[#ff2000ff]"}` : 'font-roboto text-[#ffffff37] text-[12px] font-normal'}

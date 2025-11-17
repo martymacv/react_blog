@@ -35,6 +35,8 @@ export async function loginAction({ request }) {
 
     const data = await response.json();
     
+    console.log(data);
+
     if (response.ok) {
         if (data.access) {
             localStorage.setItem('auth:access_token', data.access);

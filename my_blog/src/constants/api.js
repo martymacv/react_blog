@@ -1,4 +1,5 @@
 export const API_BASE_URL = 'http://localhost:8008';
+export const FILE_SERVER_BASE_URL = 'http://localhost:9000'
 
 export function API_DATA(method, bodyData = null, options = {}) {
     const headers = {
@@ -24,6 +25,30 @@ export function API_DATA(method, bodyData = null, options = {}) {
     return config;
 }
 
+export function API_DATA_WITH_MEDIA(method, bodyData = null, options = {}) {
+    const headers = {
+        // "Content-Type": "application/json",
+        ...options.headers,
+    };
+    console.log(headers)
+    const token = localStorage.getItem('auth:access_token');
+    console.log(`token ${token}`)
+    if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+    }
+
+    const config = {
+        credentials: 'include',
+        method, headers, ...options
+    };
+
+    if (bodyData) {
+        config.body = bodyData;
+    }
+    console.log(config)
+    return config;
+}
+
 export const API_ENDPOINTS = {
   AUTH: {
     LOGIN: '/auth/user/token/',
@@ -35,7 +60,8 @@ export const API_ENDPOINTS = {
   },
   USERS: {
     LIST: '/api/users/',
-    PROFILE: (userId) => `/profiles/${userId}/`,
+    PROFILE: '/profiles/',
+    MEDIA: '/profiles/media',
   },
   POSTS: {
     LIST: '/api/posts/',

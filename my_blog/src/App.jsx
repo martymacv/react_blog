@@ -13,6 +13,7 @@ import Portfolio from "./pages/Portfolio";
 import LogoutForm from "./pages/Auth/LogoutForm";
 
 import { confirmAction, loginAction, logoutAction, registrationAction } from "./actions/authActions";
+import { profileLoader } from "./loaders/profileLoaders";
 
 const router = createBrowserRouter([
   {
@@ -46,7 +47,11 @@ const router = createBrowserRouter([
       },
       { path: "recovery", element: <Navigate to="/auth/recovery" /> },
       { path: "auth/recovery", element: <RecoveryForm /> },
-      { path: "profile/:userId", element: <UserProfile /> },
+      { 
+        path: "profiles",
+        element: <UserProfile />,
+        loader: profileLoader
+      },
       { path: "search/", element: <SearchResult /> },
       { path: "profile/:userId/portfolio/", element: <Portfolio /> },
     //   { path: "category/:categoryId", element: <Category /> },

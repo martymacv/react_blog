@@ -3,14 +3,17 @@ import { Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import Input from "../generals/Input"
+import { useGlobalState } from "../GlobalProvider";
+import { API_ENDPOINTS } from "../../constants";
 
 function Header() {
     const actionData = useActionData();
-
-    
-    
     const [searchParams, setSearchParams] = useSearchParams()
     const navigate = useNavigate();
+
+    const {
+        logStatus
+    } = useGlobalState();
     // const hasToken = localStorage.getItem('refresh_token')
     
     // const handleKeyDown = (e) => {
@@ -22,17 +25,16 @@ function Header() {
     //         }
     //     }
     // };
-    const [ isLogin, setIsLogin ] = useState(localStorage.getItem('auth:refresh_token'));
+    const [ isLogin, setIsLogin ] = useState(logStatus);
 
     useEffect(() => {
-        setIsLogin(localStorage.getItem('auth:refresh_token'));
-        console.log(actionData);
-    }, [actionData])
+        setIsLogin(logStatus);
+    }, [logStatus])
 
-    function handleClick() {
-        setIsLogin(localStorage.getItem('auth:refresh_token'));
-        navigate("/auth/logout")
-    }
+    // function handleClick() {
+    //     // setIsLogin(localStorage.getItem('auth:refresh_token'));
+    //     navigate("/auth/logout")
+    // }
 
     // const location = useLocation()
 
@@ -58,18 +60,18 @@ function Header() {
                         </NavLink>
                     </li>
                     <li className="text-white text-[11px] font-[400] font-roboto uppercase">
-                        <NavLink to={"/profile/1"}>
+                        <NavLink to={API_ENDPOINTS.USERS.PROFILE}>
                             Профиль
                         </NavLink>
                     </li>
                     <li className="text-white text-[11px] font-[400] font-roboto uppercase">
-                        {!isLogin ? (
+                        {isLogin == "logout" ? (
                             <NavLink 
                                 to={"/login"}>
                                 Войти
                             </NavLink>
                         ) : (
-                            <a href="/auth/logout" onClick={handleClick}>Выйти</a>
+                            <NavLink to="/auth/logout">Выйти</NavLink>
                         )}
                     </li>
                 </ul>

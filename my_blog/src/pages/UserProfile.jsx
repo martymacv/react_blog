@@ -114,13 +114,13 @@ function UserProfile() {
                     <Input name="password2" type="password"
                         placeholder="Подтвердите новый пароль"></Input>
                     <Input name="insta" type="text"
-                        value={link_to_instagram}
+                        fieldValue={link_to_instagram}
                         placeholder="Профиль instagram"></Input>
                     <Input name="vk" type="text"
-                        value={link_to_vk}
+                        fieldValue={link_to_vk}
                         placeholder="Профиль vk"></Input>
                     <Input name="profession" type="text"
-                        value={profession}
+                        fieldValue={profession}
                         placeholder="Ваша профессия"></Input>
                     <Textarea name="aboutSelf"
                         // value={full_desc} 
