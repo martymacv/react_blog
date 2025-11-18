@@ -1,4 +1,3 @@
-import styles from "./UserProfile.module.css";
 import { Link, useLoaderData } from "react-router-dom";
 import ActionButton from "../components/generals/ActionButton";
 import Input from "../components/generals/Input";
@@ -21,6 +20,8 @@ function UserProfile() {
         full_desc,
         last_name,
         link_to_instagram,
+        link_to_telegram,
+        link_to_github,
         link_to_vk,
         profession,
         short_desc,
@@ -50,6 +51,8 @@ function UserProfile() {
             submitData.append('short_desc', '');
             submitData.append('full_desc', formData.get('aboutSelf') || '');
             submitData.append('link_to_instagram', formData.get('insta') || '');
+            submitData.append('link_to_telegram', formData.get('telegram') || '');
+            submitData.append('link_to_github', formData.get('github') || '');
             submitData.append('link_to_vk', formData.get('vk') || '');
             
             if (newAvatarFile && newAvatarFile.size > 0) {
@@ -90,7 +93,7 @@ function UserProfile() {
     }
 
     return (
-        <form className={styles.form}
+        <form className="form"
             onSubmit={handleSubmit}
             encType="multipart/form-data">
             <Title>Профиль</Title>
@@ -106,7 +109,7 @@ function UserProfile() {
             <Input name="email" type="text"
                 fieldValue={user.email}
                 variant="disabled" disabled></Input>
-            <section className={styles.section}>
+            <section className="section">
                 <Link to="/auth/email/"><ActionButton
                     type="button">
                     Изменить Email
@@ -117,10 +120,14 @@ function UserProfile() {
                 </ActionButton></Link>
             </section>
             <Span variant="primary">Ссылка на профиль telegram</Span>
-            <Input name="insta" type="text"
-                fieldValue={link_to_instagram}
-                placeholder="Профиль instagram"></Input>
+            <Input name="telegram" type="text"
+                fieldValue={link_to_telegram}
+                placeholder="Профиль telegram"></Input>
             <Span variant="primary">Ссылка на профиль github</Span>
+            <Input name="github" type="text"
+                fieldValue={link_to_github}
+                placeholder="Профиль github"></Input>
+            <Span variant="primary">Ссылка на профиль vk</Span>
             <Input name="vk" type="text"
                 fieldValue={link_to_vk}
                 placeholder="Профиль vk"></Input>

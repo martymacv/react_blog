@@ -85,13 +85,13 @@ export default function Sidebar() {
                     {state.profile.profession}</p>
             </div>
             <div className='flex flex-row gap-4 items-center justify-center pb-3'>
-                <a href={state.profile.link_to_instagram} target="_blank">
+                <a href={state.profile.link_to_telegram} target="_blank">
                     <img className='w-6'
-                        src={"../../../public/-5027246994669780956/Logo.svg"} alt="instagram" />
+                        src={"../../../public/-5027246994669780956/Logo.svg"} alt="telegram" />
                 </a>
-                <a href={state.profile.link_to_vk} target="_blank">
+                <a href={state.profile.link_to_github} target="_blank">
                     <img className='w-6'
-                        src="../../../public/github-mark-c791e9551fe4/github-mark/github-mark-white.svg" alt="vk" />
+                        src="../../../public/github-mark-c791e9551fe4/github-mark/github-mark-white.svg" alt="github" />
                 </a>
             </div>
             <hr className='border-1 w-[260px] border-[#1c1c1cff]' />

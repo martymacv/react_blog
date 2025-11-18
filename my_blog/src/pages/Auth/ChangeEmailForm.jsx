@@ -73,46 +73,43 @@ function ChangeEmailForm() {
     const isEmailNotMatched = Object.values(emailIsNotMatched).every((value) => value);
 
     return (
-        <div className="flex flex-col gap-5 m-12 items-center max-w-70">
-            <Form 
-                className="flex flex-col gap-5 items-center justify-center w-full"
-                method="PUT" 
-                action="/auth/email"
+        <Form className="form"
+            method="PUT" 
+            action="/auth/email"
+            >
+            <Title>Изменение Email</Title>
+            <Input 
+                type="email"
+                name="email"
+                value={email}
+                placeholder="Введите старый Email"
+                required
+                requirements={EMAIL_REQUIREMENTS}
+                fieldValue={email}
+                state={emailValidation}
+                onChange={handleEmailChange}
+                variant={email ? isEmailValid === true ? 'valid': 'invalid' : 'primary'}
+            />
+            <Input 
+                type="email"
+                name="email2"
+                value={email2}
+                placeholder="Введите новый Email"
+                required
+                requirements={[...EMAIL_REQUIREMENTS, ...EMAIL_MATCHED]}
+                fieldValue={email2}
+                state={{ ...email2Validation, ...emailIsNotMatched }}
+                onChange={handleEmail2Change}
+                variant={email2 ? isEmail2Valid === true ? 'valid': 'invalid' : 'primary'}
+            />
+            <ActionButton
+                type="submit"
+                disabled={!(isEmailValid && isEmail2Valid && isEmailNotMatched)}
+                variant={(isEmailValid && isEmail2Valid && isEmailNotMatched) ? 'primary' : 'disabled'}
                 >
-                <Title>Изменение Email</Title>
-                <Input 
-                    type="email"
-                    name="email"
-                    value={email}
-                    placeholder="Введите старый Email"
-                    required
-                    requirements={EMAIL_REQUIREMENTS}
-                    fieldValue={email}
-                    state={emailValidation}
-                    onChange={handleEmailChange}
-                    variant={email ? isEmailValid === true ? 'valid': 'invalid' : 'primary'}
-                />
-                <Input 
-                    type="email"
-                    name="email2"
-                    value={email2}
-                    placeholder="Введите новый Email"
-                    required
-                    requirements={[...EMAIL_REQUIREMENTS, ...EMAIL_MATCHED]}
-                    fieldValue={email2}
-                    state={{ ...email2Validation, ...emailIsNotMatched }}
-                    onChange={handleEmail2Change}
-                    variant={email2 ? isEmail2Valid === true ? 'valid': 'invalid' : 'primary'}
-                />
-                <ActionButton
-                    type="submit"
-                    disabled={!(isEmailValid && isEmail2Valid && isEmailNotMatched)}
-                    variant={(isEmailValid && isEmail2Valid && isEmailNotMatched) ? 'primary' : 'disabled'}
-                    >
-                    Изменить Email
-                </ActionButton>
-            </Form>
-        </div>
+                Изменить Email
+            </ActionButton>
+        </Form>
     );
 }
 

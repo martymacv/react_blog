@@ -35,3 +35,17 @@
     --valid-color: rgba(75, 255, 0, 0.75);
     --invalid-color: rgba(255, 75, 0, 0.75);
 }
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 200px;
+    max-width: 300px;
+}
+
+.section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

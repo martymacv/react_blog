@@ -71,53 +71,50 @@ function ChangePwdForm() {
     const isOldPasswordValid = Object.values(pwdMatched).every((value) => value);
 
     return (
-        <div className="flex flex-col gap-5 m-12 items-center max-w-70">
-            <Form 
-                className="flex flex-col gap-5 items-center justify-center w-full"
-                method="PUT" 
-                action="/auth/password"
+        <Form className="form"
+            method="PUT" 
+            action="/auth/password"
+            >
+            <Title>Изменение пароля</Title>
+            {/* <Input 
+                type="password"
+                name="oldPassword"
+                placeholder="Введите пароль"
+                required
+                fieldValue={oldPassword}
+            /> */}
+            <Input 
+                type="password"
+                name="password"
+                placeholder="Введите пароль"
+                required
+                requirements={PASSWORD_REQUIREMENTS}
+                fieldValue={password}
+                state={pwdValidation}
+                onChange={handlePwdChange}
+                variant={password ? isPasswordValid === true ? 'valid': 'invalid' : 'primary'}
+                value={password}
+            />
+            <Input 
+                type="password"
+                name="password2"
+                placeholder="Подтвердите пароль"
+                required
+                requirements={PASSWORD_MATCHED}
+                fieldValue={password2}
+                state={pwdMatched}
+                onChange={handlePwd2Change}
+                variant={password2 ? isPasswordMatched ? 'valid': 'invalid' : 'primary'}
+                value={password2}
+            />
+            <ActionButton
+                type="submit"
+                disabled={!(isOldPasswordValid && isPasswordValid && isPasswordMatched)}
+                variant={(isOldPasswordValid && isPasswordValid && isPasswordMatched) ? 'primary' : 'disabled'}
                 >
-                <Title>Изменение пароля</Title>
-                {/* <Input 
-                    type="password"
-                    name="oldPassword"
-                    placeholder="Введите пароль"
-                    required
-                    fieldValue={oldPassword}
-                /> */}
-                <Input 
-                    type="password"
-                    name="password"
-                    placeholder="Введите пароль"
-                    required
-                    requirements={PASSWORD_REQUIREMENTS}
-                    fieldValue={password}
-                    state={pwdValidation}
-                    onChange={handlePwdChange}
-                    variant={password ? isPasswordValid === true ? 'valid': 'invalid' : 'primary'}
-                    value={password}
-                />
-                <Input 
-                    type="password"
-                    name="password2"
-                    placeholder="Подтвердите пароль"
-                    required
-                    requirements={PASSWORD_MATCHED}
-                    fieldValue={password2}
-                    state={pwdMatched}
-                    onChange={handlePwd2Change}
-                    variant={password2 ? isPasswordMatched ? 'valid': 'invalid' : 'primary'}
-                    value={password2}
-                />
-                <ActionButton
-                    type="submit"
-                    disabled={!(isOldPasswordValid && isPasswordValid && isPasswordMatched)}
-                    variant={(isOldPasswordValid && isPasswordValid && isPasswordMatched) ? 'primary' : 'disabled'}
-                    >
-                    Изменить пароль
-                </ActionButton>
-            </Form>
-        </div>
+                Изменить пароль
+            </ActionButton>
+        </Form>
     );
 }
 
