@@ -6,8 +6,9 @@ import Title from "../../components/generals/Title";
 
 function RecoveryForm() {
     return (
-        <div className="flex flex-col gap-5 m-12 items-center max-w-70">
-            <form className="flex flex-col gap-5 items-center justify-center w-full">
+        // <div className="flex flex-col gap-5 m-12 items-center max-w-70">
+        <div className="form">
+            <form className="form">
                 <Title>Восставновление</Title>
                 <Input 
                     type="email"
@@ -17,7 +18,7 @@ function RecoveryForm() {
                     <ActionButton>Восстановить</ActionButton>
                 </Link>
             </form>
-            <div className="flex flex-row gap-4">
+            <div className="section">
                 <Link to={'/login/'} className="font-roboto text-white text-[12px] leading-[100%] font-normal">вход</Link>
                 <Link to={'/registration/'} className="font-roboto text-white text-[12px] leading-[100%] font-normal">регистрация</Link>
             </div>

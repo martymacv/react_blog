@@ -8,7 +8,7 @@ function ConfirmEmailForm() {
         <div className="flex flex-col gap-5 m-12 items-center max-w-70">
             <Form method="POST"
                 action="/auth/confirm-email"
-                className="flex flex-col gap-5 items-center justify-center w-full">
+                className="form">
                 <Title>Подтверждение Email</Title>
                 <Input 
                     type="text"

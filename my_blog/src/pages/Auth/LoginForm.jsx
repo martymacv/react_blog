@@ -1,23 +1,35 @@
-import { Link, Form, useActionData } from "react-router-dom"
+import { Link, Form, useActionData, useNavigate } from "react-router-dom"
 
 import ActionButton from "../../components/generals/ActionButton";
 import Input from "../../components/generals/Input";
 import Title from "../../components/generals/Title";
-import { useState } from "react";
+import { useEffect } from "react";
 import { useGlobalState } from "../../components/GlobalProvider";
 
 function LoginForm() {
+    const actionData = useActionData();
+    const navigate = useNavigate();
+
     const {
+        userId,
+        handleUserId,
         handleLogStatus
     } = useGlobalState();
-    
+
+    useEffect(() => {
+        if (actionData?.success) {
+            handleUserId(actionData.userData.user_id);
+            navigate(actionData.redirect);
+        }
+    }, [actionData, userId, navigate, handleUserId])
+
     function handleLogin() {
         handleLogStatus("login");
     }
     return (
-        <div className="flex flex-col gap-5 m-12 items-center max-w-70">
+        <div className="form">
             <Form 
-                className="flex flex-col gap-5 items-center justify-center w-full"
+                className="form"
                 method="POST"
                 action="/auth/login"
                 >
@@ -39,10 +51,10 @@ function LoginForm() {
                     onClick={handleLogin}
                     >Войти</ActionButton>
             </Form>
-            <div className="flex flex-row gap-4">
+            <section className="section">
                 <Link to={'/recovery/'} className="font-roboto text-white text-[12px] leading-[100%] font-normal">восстановление</Link>
                 <Link to={'/registration/'} className="font-roboto text-white text-[12px] leading-[100%] font-normal">регистрация</Link>
-            </div>
+            </section>
         </div>
     );
 }
