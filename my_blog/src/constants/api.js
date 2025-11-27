@@ -1,4 +1,4 @@
-export const API_BASE_URL = 'http://localhost:8008';
+export const API_BASE_URL = 'http://localhost:8888';
 export const FILE_SERVER_BASE_URL = 'http://localhost:9000'
 
 export function API_DATA(method, bodyData = null, options = {}) {
@@ -7,7 +7,7 @@ export function API_DATA(method, bodyData = null, options = {}) {
         ...options.headers,
     };
     console.log(headers)
-    const token = localStorage.getItem('auth:access_token');
+    const token = localStorage.getItem('auth:accessToken');
     console.log(`token ${token}`)
     if (token) {
         headers['Authorization'] = `Bearer ${token}`;
@@ -31,7 +31,7 @@ export function API_DATA_WITH_MEDIA(method, bodyData = null, options = {}) {
         ...options.headers,
     };
     console.log(headers)
-    const token = localStorage.getItem('auth:access_token');
+    const token = localStorage.getItem('auth:accessToken');
     console.log(`token ${token}`)
     if (token) {
         headers['Authorization'] = `Bearer ${token}`;
@@ -51,18 +51,18 @@ export function API_DATA_WITH_MEDIA(method, bodyData = null, options = {}) {
 
 export const API_ENDPOINTS = {
   AUTH: {
-    LOGIN: '/auth/user/token/',
-    REGISTER: '/auth/user/',
-    EMAIL: '/auth/user/email/',
-    PASSWORD: '/auth/user/password/',
-    CONFIRM: (userId) => `/auth/user/${userId}/confirm`,
+    LOGIN: '/auth/token/',
+    REGISTER: '/users/',
+    EMAIL: '/users/email/',
+    PASSWORD: '/users/password/',
+    CONFIRM: (userId) => `/users/${userId}/confirm/`,
     REFRESH: '/auth/token/refresh/',
     LOGOUT: '/auth/logout/',
     PROFILE: '/auth/profile/',
   },
   USERS: {
     LIST: '/api/users/',
-    PROFILE: '/profiles/',
+    PROFILE: (profileId) => `/profiles/${profileId}/`,
     MEDIA: '/profiles/media',
   },
   POSTS: {
