@@ -12,6 +12,7 @@ function Header() {
     const navigate = useNavigate();
 
     const {
+        userId,
         logStatus
     } = useGlobalState();
     // const hasToken = localStorage.getItem('refresh_token')
@@ -47,7 +48,7 @@ function Header() {
 
     return (
         <div className="flex flex-row justify-between items-center p-4 bg-[#0d0d0dff] shadow-header">
-            <nav className="">
+            <nav className='header'>
                 <ul className="flex flex-row flex-wrap gap-6">
                     <li className="text-white text-[11px] font-[400] font-roboto uppercase">
                         <NavLink>
@@ -60,7 +61,7 @@ function Header() {
                         </NavLink>
                     </li>
                     <li className="text-white text-[11px] font-[400] font-roboto uppercase">
-                        <NavLink to={API_ENDPOINTS.USERS.PROFILE}>
+                        <NavLink to={API_ENDPOINTS.USERS.PROFILE(localStorage.getItem('auth:userId'))}>
                             Профиль
                         </NavLink>
                     </li>

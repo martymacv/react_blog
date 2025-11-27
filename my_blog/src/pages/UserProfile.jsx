@@ -25,7 +25,8 @@ function UserProfile() {
         link_to_vk,
         profession,
         short_desc,
-        user,
+        // user,
+        // primary_email,
         wallpaper
     } = loaderData.data;
 
@@ -64,7 +65,7 @@ function UserProfile() {
             }
 
             const response = await fetch(
-                `${API_BASE_URL}${API_ENDPOINTS.USERS.PROFILE}`,
+                `${API_BASE_URL}${API_ENDPOINTS.USERS.PROFILE(localStorage.getItem('auth:userId'))}`,
                 API_DATA_WITH_MEDIA("POST", submitData)
             );
 
@@ -107,7 +108,7 @@ function UserProfile() {
                 placeholder="Введите вашу фамилию"></Input>
             <Span variant="primary">Ваш Email</Span>
             <Input name="email" type="text"
-                fieldValue={user.email}
+                // fieldValue={primary_email}
                 variant="disabled" disabled></Input>
             <section className="section">
                 <Link to="/auth/email/"><ActionButton

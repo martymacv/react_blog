@@ -60,7 +60,7 @@ const router = createBrowserRouter([
       { path: "recovery", element: <Navigate to="/auth/recovery" /> },
       { path: "auth/recovery", element: <RecoveryForm /> },
       { 
-        path: "profiles",
+        path: "profiles/:profileId/",
         element: <UserProfile />,
         loader: profileLoader
       },

@@ -1,5 +1,5 @@
-import { useEffect, useReducer } from 'react';
-import { Link } from 'react-router-dom'
+import { useEffect, useReducer, useRef, useState } from 'react';
+import { Link, useActionData, useLoaderData } from 'react-router-dom'
 import { API_BASE_URL, API_DATA, API_ENDPOINTS } from '../../constants';
 import { useGlobalState } from '../GlobalProvider';
 
@@ -34,40 +34,56 @@ function reducer(state, action) {
 
 export default function Sidebar() {
     const [state, dispatch ] = useReducer(reducer, initialState);
-    const { userId, accessToken, updatedProfile } = useGlobalState();
+    const { userId, setProfileStatus } = useGlobalState();
+
+    const containerRef = useRef();
 
     useEffect(() => {
         async function fetchData() {
             try {
                 const response = await fetch(
-                    `${API_BASE_URL}${API_ENDPOINTS.USERS.PROFILE}`, 
+                    `${API_BASE_URL}${API_ENDPOINTS.USERS.PROFILE(localStorage.getItem('auth:userId'))}`, 
                     API_DATA("GET")
                 );
-                console.log(`${API_BASE_URL}${API_ENDPOINTS.USERS.PROFILE}`)
+                // console.log(`${API_BASE_URL}${API_ENDPOINTS.USERS.PROFILE}`)
                 if (!response.ok) {
                     throw new Error(`Failed to fetch! Error: ${response.status}`)
                 }
                 const data = await response.json()
                 dispatch({ type: "profileData", payload: data })
+                setProfileStatus('new');
             } catch (error) {
-                dispatch({ type: "dataFailed", payload: error })
+                dispatch({ type: "dataFailed", payload: error });
+                setProfileStatus('error');
             }
         };
-        fetchData();
-    }, [userId, accessToken, updatedProfile])
+        if (userId) {
+            fetchData();
+        }
+    }, [userId, setProfileStatus])
+
+    const handleWheel = (e) => {
+        // e.preventDefault();
+        e.stopPropagation();
+        const scrollAmount = e.deltaY
+        containerRef.current.scrollBy({
+          left: scrollAmount,
+          behavior: 'smooth' // Плавная прокрутка
+        });
+    };
 
     if (state.status === "loading"){
-      return <p className='text-[#dededeff]'>Loading data, please wait...</p>
+        return <p className='text-[#dededeff]'>Loading data, please wait...</p>
     }
     if (state.status === "error"){
         return <p className='text-[#dededeff]'>Failed to fetch data. Please try again!</p>
     }
 
     return (
-        <>
+        <div className='flex flex-col items-center w-[280px]'>
         {/* {logStatus === "login" ? (
         <> */}
-            <div className='relative flex flex-col items-center justify-start w-full h-[230px] mb-3'>
+            <div className='relative flex flex-col items-center justify-start w-[full] h-[230px] mb-3'>
                 <img className='w-[300px] max-h-[180px] object-cover object-center'
                     src={state.profile.wallpaper === null ? (
                         "../src/assets/images/wallpaper.png"
@@ -76,8 +92,52 @@ export default function Sidebar() {
                 <div className='absolute top-[130px]'>
                     <img className='w-[100px] h-[100px] border-3 border-white object-cover rounded-full '
                         src={`${API_BASE_URL}${state.profile.avatar}`} alt="avatar" />
+                    <div className='absolute top-0 right-0 rounded-full w-6 h-6 bg-red-900 flex items-center justify-center text-white font-medium'>
+                        <p>5</p>
+                    </div>
                 </div>
             </div>
+            {/* <div ref={containerRef} className='subscriptions' onWheel={handleWheel}>
+                <div className='rounded-full w-6 h-6 bg-red-900 flex items-center justify-center text-white font-medium'>
+                    <p>5</p>
+                </div>
+                <div className='rounded-full w-6 h-6 bg-red-900 flex items-center justify-center text-white font-medium'>
+                    <p>5</p>
+                </div>
+                <div className='rounded-full w-6 h-6 bg-red-900 flex items-center justify-center text-white font-medium'>
+                    <p>5</p>
+                </div>
+                <div className='rounded-full w-6 h-6 bg-red-900 flex items-center justify-center text-white font-medium'>
+                    <p>5</p>
+                </div>
+                <div className='rounded-full w-6 h-6 bg-red-900 flex items-center justify-center text-white font-medium'>
+                    <p>5</p>
+                </div>
+                <div className='rounded-full w-6 h-6 bg-red-900 flex items-center justify-center text-white font-medium'>
+                    <p>5</p>
+                </div>
+                <div className='rounded-full w-6 h-6 bg-red-900 flex items-center justify-center text-white font-medium'>
+                    <p>5</p>
+                </div>
+                <div className='rounded-full w-6 h-6 bg-red-900 flex items-center justify-center text-white font-medium'>
+                    <p>5</p>
+                </div>
+                <div className='rounded-full w-6 h-6 bg-red-900 flex items-center justify-center text-white font-medium'>
+                    <p>5</p>
+                </div>
+                <div className='rounded-full w-6 h-6 bg-red-900 flex items-center justify-center text-white font-medium'>
+                    <p>5</p>
+                </div>
+                <div className='rounded-full w-6 h-6 bg-red-900 flex items-center justify-center text-white font-medium'>
+                    <p>5</p>
+                </div>
+                <div className='rounded-full w-6 h-6 bg-red-900 flex items-center justify-center text-white font-medium'>
+                    <p>5</p>
+                </div>
+                <div className='rounded-full w-6 h-6 bg-red-900 flex items-center justify-center text-white font-medium'>
+                    <p>5</p>
+                </div>
+            </div> */}
             <div className='flex flex-col items-center justify-center'>
                 <h1 className='text-white text-[18px] font-[400] font-roboto'>
                     {state.profile.first_name} {state.profile.last_name}</h1>
@@ -108,6 +168,6 @@ export default function Sidebar() {
             
             
         {/* </>) : (<div></div>)} */}
-        </>
+        </div>
     );
 }

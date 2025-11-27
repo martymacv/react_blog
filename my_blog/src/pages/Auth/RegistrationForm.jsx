@@ -105,9 +105,11 @@ function RegistrationFrom() {
     const isPasswordMatched = Object.values(pwdMatched).every((value) => value);
 
     return (
-        <div className="flex flex-col gap-5 m-12 items-center max-w-70">
+        // <div className="flex flex-col gap-5 m-12 items-center max-w-70">
+        <div className="form">
             <Form 
-                className="flex flex-col gap-5 items-center justify-center w-full"
+                // className="flex flex-col gap-5 items-center justify-center w-full"
+                className="form"
                 method="POST" 
                 action="/auth/registration"
                 >
@@ -156,7 +158,7 @@ function RegistrationFrom() {
                     Зарегистрироваться
                 </ActionButton>
             </Form>
-            <div className="flex flex-row gap-4">
+            <div className="section">
                 <Link to={'/recovery/'} className="font-roboto text-white text-[12px] leading-[100%] font-normal">восстановление</Link>
                 <Link to={'/login/'} className="font-roboto text-white text-[12px] leading-[100%] font-normal">вход</Link>
             </div>
