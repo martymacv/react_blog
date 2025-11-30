@@ -1,6 +1,6 @@
 import { useLocation, useSearchParams } from "react-router-dom"
-import Input from "../components/generals/Input"
-import Title from "../components/generals/Title"
+import Input from "../components/singles/Input"
+import Title from "../components/singles/Title"
 
 import NormalPost from "../components/HomePage/NormalPost"
 import { useState } from "react"

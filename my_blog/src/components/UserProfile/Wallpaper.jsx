@@ -1,5 +1,5 @@
 import styles from "./Avatar.module.css"
-import Span from "../generals/Span"
+import Span from "../singles/Span"
 import { useState } from "react";
 import imageCompression from 'browser-image-compression';
 

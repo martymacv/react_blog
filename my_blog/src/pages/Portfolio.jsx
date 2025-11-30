@@ -1,4 +1,4 @@
-import Title from "../components/generals/Title"
+import Title from "../components/singles/Title"
 import PortfolioItem from "../components/Portfolio/PortfolioItem"
 
 function Portfolio() {

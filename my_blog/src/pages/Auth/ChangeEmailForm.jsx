@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Form } from "react-router-dom";
 import { EMAIL_MATCHED, EMAIL_REQUIREMENTS } from "../../constants";
 import { CHAR_REPLACER } from "../../components/utils";
-import Title from "../../components/generals/Title";
-import Input from "../../components/generals/Input";
-import ActionButton from "../../components/generals/ActionButton";
+import Title from "../../components/singles/Title";
+import Input from "../../components/singles/Input";
+import ActionButton from "../../components/singles/ActionButton";
 
 function ChangeEmailForm() {
     const [email, setEmail] = useState('');

@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom"
-import ActionButton from "../generals/ActionButton"
+import ActionButton from "../singles/ActionButton"
 import { useState } from "react"
 
 function PortfolioItem({ variant = "primary", poster, title, note, tags, linkTo }) {

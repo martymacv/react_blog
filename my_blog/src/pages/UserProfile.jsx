@@ -1,11 +1,11 @@
 import { Link, useLoaderData } from "react-router-dom";
-import ActionButton from "../components/generals/ActionButton";
-import Input from "../components/generals/Input";
-import Title from "../components/generals/Title";
+import ActionButton from "../components/singles/ActionButton";
+import Input from "../components/singles/Input";
+import Title from "../components/singles/Title";
 import Wallpaper from "../components/UserProfile/Wallpaper";
 import Avatar from "../components/UserProfile/Avatar";
-import Textarea from "../components/generals/Textarea";
-import Span from "../components/generals/Span";
+import Textarea from "../components/singles/Textarea";
+import Span from "../components/singles/Span";
 import { useState } from "react"
 import { API_BASE_URL, API_DATA_WITH_MEDIA, API_ENDPOINTS } from "../constants";
 import { useGlobalState } from "../components/GlobalProvider";

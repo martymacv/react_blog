@@ -1,8 +1,8 @@
 import { Link, Form, useActionData, useNavigate } from "react-router-dom"
 import { EMAIL_REQUIREMENTS, PASSWORD_REQUIREMENTS, PASSWORD_MATCHED } from "../../constants";
-import ActionButton from "../../components/generals/ActionButton";
-import Input from "../../components/generals/Input";
-import Title from "../../components/generals/Title";
+import ActionButton from "../../components/singles/ActionButton";
+import Input from "../../components/singles/Input";
+import Title from "../../components/singles/Title";
 import { useEffect, useState } from "react";
 import { CHAR_REPLACER } from "../../components/utils";
 

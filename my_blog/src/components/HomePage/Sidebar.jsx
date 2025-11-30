@@ -2,6 +2,7 @@ import { useEffect, useReducer, useRef, useState } from 'react';
 import { Link, useActionData, useLoaderData } from 'react-router-dom'
 import { API_BASE_URL, API_DATA, API_ENDPOINTS } from '../../constants';
 import { useGlobalState } from '../GlobalProvider';
+import ActionButton from '../singles/ActionButton';
 
 const initialState = {
     profile: {},
@@ -80,7 +81,7 @@ export default function Sidebar() {
     }
 
     return (
-        <div className='flex flex-col items-center w-[280px]'>
+        <div className='flex flex-col gap-3 items-center w-[280px]'>
         {/* {logStatus === "login" ? (
         <> */}
             <div className='relative flex flex-col items-center justify-start w-[full] h-[230px] mb-3'>
@@ -158,14 +159,18 @@ export default function Sidebar() {
             <p className='text-white text-[12px] font-[400] leading-[18px] tracking-[0%] text-center py-3 px-5 font-roboto'>
                 {state.profile.full_desc}
             </p>
-            {/* <hr className='border-1 w-[260px] border-[#1c1c1cff]' />
-            <div className='flex flex-row gap-5 items-center justify-center p-4'>
+            <hr className='border-1 w-[260px] border-[#1c1c1cff]' />
+            {/* <div className='flex flex-row gap-5 items-center justify-center p-4'>
                 <Link to="/profile/1/portfolio">
                     <button className='text-white font-roboto text-button bg-[#ed3024ff] rounded-full w-[120px] h-[40px]' type='button'>Мои работы</button>
                 </Link>
                 <button className='text-white font-roboto text-button bg-[#3137c9ff] rounded-full w-[120px] h-[40px]' type='button'>Написать мне</button>
             </div> */}
-            
+            <Link to={'/add-new-post/'}>
+                <ActionButton>
+                    Создать пост
+                </ActionButton>
+            </Link>
             
         {/* </>) : (<div></div>)} */}
         </div>

@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom"
 
-import ActionButton from "../../components/generals/ActionButton";
-import Input from "../../components/generals/Input";
-import Title from "../../components/generals/Title";
+import ActionButton from "../../components/singles/ActionButton";
+import Input from "../../components/singles/Input";
+import Title from "../../components/singles/Title";
 
 function RecoveryForm() {
     return (

@@ -2,7 +2,7 @@ import { NavLink, useActionData, useLocation, useNavigate, useSearchParams } fro
 import { Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import Input from "../generals/Input"
+import Input from "../singles/Input"
 import { useGlobalState } from "../GlobalProvider";
 import { API_ENDPOINTS } from "../../constants";
 

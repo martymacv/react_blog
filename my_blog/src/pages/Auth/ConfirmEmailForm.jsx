@@ -1,7 +1,7 @@
 import { Form, Link } from "react-router-dom"
-import Title from "../../components/generals/Title"
-import Input from "../../components/generals/Input"
-import ActionButton from "../../components/generals/ActionButton"
+import Title from "../../components/singles/Title"
+import Input from "../../components/singles/Input"
+import ActionButton from "../../components/singles/ActionButton"
 
 function ConfirmEmailForm() {
     return (
