@@ -89,3 +89,179 @@ div::-webkit-scrollbar {
     justify-content: center;
     margin: 48px;
 }
+
+/* Дополнительные стили для лучшего внешнего вида */
+.ProseMirror {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5em;
+  /* word-spacing: 0.3em; */
+  /* letter-spacing: 0.1em; */
+  background-color: #181818ff;
+  color: #d2d2d2ff;
+  width: 100%;
+  min-height: 2em;
+  padding: 0.4em 2em;
+  
+  /* Рекомендуемые дополнения */
+  outline: none;
+  border: 1px solid #333;
+  border-radius: 4px;
+  margin: 0;
+}
+
+/* Заголовки с отступами и весами */
+.ProseMirror h1.heading-custom {
+  font-size: 29px;
+  font-weight: 600;
+  margin: 1.5em 0 0.5em 0;
+  color: #ffffff;
+}
+
+.ProseMirror h2.heading-custom {
+  font-size: 24px;
+  font-weight: 500;
+  margin: 1.25em 0 0.5em 0;
+  color: #f0f0f0;
+}
+
+.ProseMirror h3.heading-custom {
+  font-size: 19px;
+  font-weight: 500;
+  margin: 1em 0 0.5em 0;
+  color: #e8e8e8;
+}
+
+/* Стили для параграфов и других элементов */
+.ProseMirror p.paragraph-custom {
+  text-indent: 1.5em;
+  margin: 0.75em 0;
+  padding: 0;
+}
+
+/* Стили для inline-кода */
+.ProseMirror code.inline-code-custom {
+  border-radius: 0.25em;
+  padding: 0.25em 0.5em;
+  font-family: 'Courier New', monospace;
+  border: 1px solid #d2d2d2d2;
+  color: #ffffff;
+  background-color: black;
+}
+
+/* Стили для block-кода */
+.ProseMirror pre.block-code-custom code {
+  display: block;
+  border-radius: 0.25em;
+  padding: 0.25em 0.5em;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  font-weight: 400;
+  border: 1px solid #d2d2d2d2;
+  color: #ffffff;
+  background-color: black;
+}
+
+.ProseMirror blockquote.blockquote-custom {
+  padding-left: 1.5em;
+}
+
+.ProseMirror blockquote.blockquote-custom p {
+  text-indent: 0em;
+  border-left: 4px solid white;
+  /* margin: 1.5em 0; */
+  padding-left: 1.5em;
+  font-style: italic;
+}
+
+/* Маркированный список */
+.ProseMirror ul.bullet-list-custom {
+  margin: 1em 0;
+  padding-left: 3em;
+  list-style: none;
+}
+
+.ProseMirror ul.bullet-list-custom li.list-item-custom {
+  position: relative;
+  margin: 0.5em 0;
+  padding-left: 1.5em;
+}
+
+/* Кастомные маркеры */
+.ProseMirror ul.bullet-list-custom li.list-item-custom::before {
+  content: "•";
+  color: #d2d2d2;
+  position: absolute;
+  left: 0;
+  font-size: 1.2em;
+}
+
+/* Альтернативные маркеры */
+.ProseMirror ul.bullet-list-custom.disc li.list-item-custom::before {
+  content: "●";
+}
+
+.ProseMirror ul.bullet-list-custom.dash li.list-item-custom::before {
+  content: "—";
+}
+
+.ProseMirror ul.bullet-list-custom.arrow li.list-item-custom::before {
+  content: "→";
+}
+
+/* Нумерованный список */
+.ProseMirror ol.ordered-list-custom {
+  margin: 1em 0;
+  padding-left: 3em;
+  list-style: none;
+  counter-reset: ordered-counter;
+}
+
+.ProseMirror ol.ordered-list-custom li.list-item-custom {
+  position: relative;
+  margin: 0.5em 0;
+  padding-left: 1.5em;
+  counter-increment: ordered-counter;
+}
+
+.ProseMirror ol.ordered-list-custom li.list-item-custom::before {
+  content: counter(ordered-counter) ".";
+  color: #d2d2d2;
+  position: absolute;
+  left: 0;
+  font-weight: 600;
+}
+
+.ProseMirror ul.bullet-list-custom li.list-item-custom p,
+.ProseMirror ol.ordered-list-custom li.list-item-custom p {
+  text-indent: 0em;
+}
+
+/* Стили для вложенных списков */
+.ProseMirror ul.bullet-list-custom ul.bullet-list-custom,
+.ProseMirror ol.ordered-list-custom ol.ordered-list-custom {
+  margin: 0.5em 0;
+}
+
+.ProseMirror ul.bullet-list-custom ul.bullet-list-custom li.list-item-custom::before {
+  content: "◦";
+  font-size: 1.1em;
+}
+
+.ProseMirror ol.ordered-list-custom ol.ordered-list-custom li.list-item-custom::before {
+  content: counter(ordered-counter, lower-alpha) ".";
+}
+
+/* Стили для фокуса и выделения */
+.ProseMirror:focus {
+  border-color: #555;
+}
+
+.ProseMirror .is-editor-empty:first-child::before {
+  color: #6b7280;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
