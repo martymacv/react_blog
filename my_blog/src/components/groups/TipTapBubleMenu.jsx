@@ -1,49 +1,62 @@
+import { useCallback } from 'react'
 import styles from './TipTapEditorToolbar.module.css'
 import { BubbleMenu } from '@tiptap/react/menus'
 
 function TipTapBubleMenu({ editor, editorState }) {
-    return (
-        <BubbleMenu editor={editor}>
-            <div className={`sticky ${styles.toolbar}`}>
-                <button
-                  onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-                  className={editorState.isHeading1 ? 'is-active' : ''}
-                >
-                  H1
-                </button>
-                <button
-                  onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-                  className={editorState.isHeading2 ? 'is-active' : ''}
-                >
-                  H2
-                </button>
-                <button
-                  onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-                  className={editorState.isHeading3 ? 'is-active' : ''}
-                >
-                  H3
-                </button>
-                <button
-                  onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()}
-                  className={editorState.isHeading4 ? 'is-active' : ''}
-                >
-                  H4
-                </button>
-                <button
-                  onClick={() => editor.chain().focus().toggleHeading({ level: 5 }).run()}
-                  className={editorState.isHeading5 ? 'is-active' : ''}
-                >
-                  H5
-                </button>
-                <button
-                  onClick={() => editor.chain().focus().toggleHeading({ level: 6 }).run()}
-                  className={editorState.isHeading6 ? 'is-active' : ''}
-                >
-                  H6
-                </button>
-                </div>
-        </BubbleMenu>
-    )
+  const variants = {
+    primary: `${styles.toolbar}  ${styles.primary}`
+  }
+  const addImage = useCallback(() => {
+    const url = window.prompt('URL')
+
+    if (url) {
+      editor.chain().focus().setImage({ src: url }).run()
+    }
+  }, [editor])
+
+  if (!editor) {
+    return null
+  }
+  return (
+    <BubbleMenu editor={editor}>
+      <div className={`sticky ${styles.toolbar}`}>
+        <section className={styles.formatPanel}>
+          <button
+            title='Жирный'
+            onClick={() => editor.chain().focus().toggleBold().run()}
+            disabled={!editorState.canBold}
+            className={`${editorState.isBold ? `${styles.isActive}` : ''} ${variants.primary}`}
+            >
+            <strong>Ж</strong>
+          </button>
+          <button
+            title='Курсив'
+            onClick={() => editor.chain().focus().toggleItalic().run()}
+            disabled={!editorState.canItalic}
+            className={`${editorState.isItalic ? `${styles.isActive}` : ''} ${variants.primary}`}
+            >
+            <i>К</i>
+          </button>
+          <button
+            title='Зачеркнутый'
+            onClick={() => editor.chain().focus().toggleStrike().run()}
+            disabled={!editorState.canStrike}
+            className={`${editorState.isStrike ? `${styles.isActive}` : ''} ${variants.primary}`}
+            >
+            <s>З</s>
+          </button>
+          <button
+            title='Код'
+            onClick={() => editor.chain().focus().toggleCode().run()}
+            disabled={!editorState.canCode}
+            className={`${editorState.isCode ? `${styles.isActive}` : ''} ${variants.primary}`}
+            >
+            <code className={styles.codeBlock}>КОД</code>
+          </button>
+        </section>
+      </div>
+    </BubbleMenu>
+  )
 }
 
-export default TipTapBubleMenu
+export default TipTapBubleMenu;
