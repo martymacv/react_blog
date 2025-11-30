@@ -2,7 +2,7 @@ import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom"
 
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
-import PostDetail from "./pages/PostDetail";
+// import PostDetail from "./pages/Post/PostDetail";
 import LoginForm from "./pages/Auth/LoginForm";
 import RegistrationFrom from "./pages/Auth/RegistrationForm";
 import ConfirmEmailForm from "./pages/Auth/ConfirmEmailForm";
@@ -16,6 +16,8 @@ import ChangePwdForm from "./pages/Auth/ChangePwdForm";
 
 import { changeEmailAction, changePwdAction, confirmAction, loginAction, logoutAction, registrationAction } from "./actions/authActions";
 import { profileLoader } from "./loaders/profileLoaders";
+import PostEditor from "./pages/Post/PostEditor";
+import Post from "./components/PostDetailPage/Post"
 
 const router = createBrowserRouter([
   {
@@ -24,7 +26,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       // { path: "old-home", element: <Navigate to={"/"} /> },
-      { path: "post/:postId", element: <PostDetail /> },
+      { path: "post/:postId", element: <Post /> },
       { path: "login", element: <Navigate to="/auth/login" /> },
       { 
         path: "auth/login",
@@ -72,6 +74,7 @@ const router = createBrowserRouter([
       // { path: "*", element: <Navigate to="/" /> },
     ],
   },
+  { path: "add-new-post", element: <PostEditor/> },
 ]);
 
 function App() {
