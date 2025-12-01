@@ -1,3 +1,8 @@
+# Restrictions and rights
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
