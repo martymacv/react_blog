@@ -1,4 +1,4 @@
-export const API_BASE_URL = 'http://localhost:8888';
+export const API_BASE_URL = 'http://37.77.105.19';
 export const FILE_SERVER_BASE_URL = 'http://localhost:9000'
 
 export function API_DATA(method, bodyData = null, options = {}) {
