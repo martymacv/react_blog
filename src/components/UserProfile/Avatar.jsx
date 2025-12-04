@@ -2,6 +2,7 @@ import styles from "./Avatar.module.css"
 import Span from "../singles/Span"
 import { useState } from "react";
 import imageCompression from 'browser-image-compression';
+import ProtectedImage from '../singles/ProtectedImage';
 
 function Avatar({ variant = "avatar", changeAvatar, src, ...props }) {
     const [previewUrl, setPreviewUrl] = useState(null);
@@ -48,8 +49,11 @@ function Avatar({ variant = "avatar", changeAvatar, src, ...props }) {
     return (
         <label htmlFor={variant}
             className={styles.label}>
-            <img src={previewUrl ? previewUrl: src} alt="Preview"
-                className={`${styles.avatar} ${loading ? styles.effects : ''}`}/>
+            <ProtectedImage
+                src={previewUrl ? previewUrl: src} alt="Preview"
+                className={`${styles.avatar} ${loading ? styles.effects : ''}`}
+                fallback="/default-product.jpg"
+            />
             <Span variant="link">
                 Выберите фото профиля
             </Span>

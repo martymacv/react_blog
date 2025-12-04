@@ -7,7 +7,6 @@ import { useGlobalState } from "./GlobalProvider";
 import { useEffect, useState } from "react";
 
 function Layout() {
-  const styles = "flex flex-col shadow-sidebar gap-4 min-h-full w-[300px] bg-[#202020ff] items-center"
   const {
     profileStatus
   } = useGlobalState();
@@ -15,13 +14,13 @@ function Layout() {
   return (
     // <div id="header"className="flex flex-row min-h-screen min-w-[680px] max-w-[1000px] bg-[#181818ff]">
     <div id="header" className="flex flex-row min-h-screen w-full bg-[#181818ff]">
-        <aside className={`${profileStatus === 'new' ? `${styles}` : 'hidden'}`}>
-            <Sidebar/>
-        </aside>
         <div className="flex flex-col w-full">
             <header className='sticky'>
                 <Header/>
             </header>
+            <aside className={`${profileStatus !== 'new' && 'hidden'}`}>
+              <Sidebar/>
+            </aside>
             <main className="main">
               <Outlet className="w-full"/>
             </main>

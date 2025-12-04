@@ -1,0 +1,95 @@
+import { useEffect, useRef, useState } from "react"
+
+function ProtectedImage({ src, alt, className, fallback }) {
+    const [imageUrl, setImageUrl] = useState('');
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
+    const abortControllerRef = useRef(null);
+
+    useEffect(() => {
+        async function fetchImage() {
+            if (!src) {
+                return;
+            }
+        
+            if (abortControllerRef.current) {
+                abortControllerRef.current.abort();
+            }
+        
+            abortControllerRef.current = new AbortController();
+            setLoading(true);
+            setError(false);
+        
+            try {
+                const token = localStorage.getItem('auth:accessToken');
+                console.log(token)
+                const response = await fetch(
+                    src,
+                    {
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Accept': 'image/*',
+                        },
+                        credentials: 'include',
+                        signal: abortControllerRef.current.signal
+                    }
+                );
+            
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+            
+                const blob = await response.blob();
+                const objectUrl = URL.createObjectURL(blob);
+                setImageUrl(objectUrl);
+            } catch (error) {
+                if (error.name !== 'AbortError') {
+                    console.error('Error loading protected image:', error);
+                    setError(true);
+                }
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchImage();
+
+        // очистка при размонтировании
+        return () => {
+            if (abortControllerRef.current) {
+                abortControllerRef.current.abort();
+            }
+            if (imageUrl) {
+                URL.revokeObjectURL(imageUrl);
+            }
+        };
+    }, [src])
+
+    if (loading) {
+        return (
+            <div className={`image-loading ${className}`}>
+                <div className="spinner"></div>
+            </div>
+        )
+    }
+
+    if (error || !imageUrl) {
+        return fallback ? (
+            <img src={fallback} alt={alt} className={className} />
+        ) : (
+            <div className={`image-error ${className}`}>
+                <span>⚠️</span>
+            </div>
+        )
+    }
+
+    return (
+        <img
+            src={imageUrl}
+            alt={alt}
+            className={className}
+            onError={() => setError(true)}
+        />
+    )
+}
+
+export default ProtectedImage;
