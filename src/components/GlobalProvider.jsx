@@ -5,6 +5,7 @@ const GlobalContext = createContext();
 function GlobalProvider({ children }) {
     const isLogin = localStorage.getItem("auth:accessToken") ? "login" : "logout"
     const [userId, setUserId] = useState("");
+    const [selectedPost, setSelectedPost] = useState({});
     const [accessToken, setAccessToken] = useState("");
     const [logStatus, setLogStatus] = useState(isLogin);
     const [updatedProfile, setUpdatedProfile] = useState(0);
@@ -35,8 +36,9 @@ function GlobalProvider({ children }) {
         <GlobalContext.Provider
             value={{
                 accessToken, logStatus, userId, updatedProfile, profileStatus,
+                selectedPost,
                 handleAccess, handleLogStatus, handleUserId, setUpdatedProfile,
-                setProfileStatus
+                setProfileStatus, setSelectedPost
             }}>
             {children}
         </GlobalContext.Provider>
