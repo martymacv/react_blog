@@ -1,8 +1,9 @@
 import styles from "./Avatar.module.css"
-import Span from "../singles/Span"
+import defaultWallpaper from '../../assets/images/defaults/default-wallpaper.svg'
+import Span from "../../components/singles/Span";
 import { useState } from "react";
 import imageCompression from 'browser-image-compression';
-import ProtectedImage from "../singles/ProtectedImage";
+import ProtectedImage from "../../components/singles/ProtectedImage";
 
 function Wallpaper({ variant = "wallpaper", changeWallpaper, src, ...props }) {
     const [previewUrl, setPreviewUrl] = useState(null);
@@ -50,7 +51,7 @@ function Wallpaper({ variant = "wallpaper", changeWallpaper, src, ...props }) {
             <ProtectedImage
                 src={previewUrl ? previewUrl: src} alt="Preview"
                 className={`${styles.wallpaper} ${loading ? styles.effects : ''}`}
-                fallback="/default-product.jpg"
+                fallback={defaultWallpaper}
             />
             <Span variant="link">
                 Выберите фото обоев

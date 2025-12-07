@@ -1,4 +1,5 @@
 import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
+import { ROUTES } from "./constants";
 
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
@@ -7,7 +8,7 @@ import LoginForm from "./pages/Auth/LoginForm";
 import RegistrationFrom from "./pages/Auth/RegistrationForm";
 import ConfirmEmailForm from "./pages/Auth/ConfirmEmailForm";
 import RecoveryForm from "./pages/Auth/RecoveryForm";
-import UserProfile from "./pages/UserProfile";
+import Profile from "./pages/Profile/Profile";
 import SearchResult from "./pages/SearchResult";
 import Portfolio from "./pages/Portfolio";
 import LogoutForm from "./pages/Auth/LogoutForm";
@@ -17,16 +18,30 @@ import ChangePwdForm from "./pages/Auth/ChangePwdForm";
 import { changeEmailAction, changePwdAction, confirmAction, loginAction, logoutAction, registrationAction } from "./actions/authActions";
 import { profileLoader } from "./loaders/profileLoaders";
 import PostEditor from "./pages/Post/PostEditor";
-import Post from "./components/PostDetailPage/Post"
+import PostDetail from "./pages/Post/PostDetail"
+import { allPostsLoader, postLoader } from "./loaders/postsLoaders";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
-      { index: true, element: <Home /> },
-      // { path: "old-home", element: <Navigate to={"/"} /> },
-      { path: "post/:postId", element: <Post /> },
+      {
+        index: true,
+        element: <Home />,
+        loader: allPostsLoader
+      },
+      {
+        path: ROUTES.POSTS.DETAIL,
+        element: <PostDetail />,
+        loader: postLoader
+      },
+      { path: ROUTES.POSTS.EDITOR, element: <PostEditor/> },
+      { 
+        path: ROUTES.PROFILES.EDITOR,
+        element: <Profile />,
+        loader: profileLoader
+      },
       { path: "login", element: <Navigate to="/auth/login" /> },
       { 
         path: "auth/login",
@@ -61,11 +76,7 @@ const router = createBrowserRouter([
       },
       { path: "recovery", element: <Navigate to="/auth/recovery" /> },
       { path: "auth/recovery", element: <RecoveryForm /> },
-      { 
-        path: "profiles/:profileId/",
-        element: <UserProfile />,
-        loader: profileLoader
-      },
+
       { path: "search/", element: <SearchResult /> },
       { path: "profile/:userId/portfolio/", element: <Portfolio /> },
     //   { path: "category/:categoryId", element: <Category /> },
@@ -74,7 +85,7 @@ const router = createBrowserRouter([
       // { path: "*", element: <Navigate to="/" /> },
     ],
   },
-  { path: "add-new-post", element: <PostEditor/> },
+  // { path: "add-new-post", element: <PostEditor/> },
 ]);
 
 function App() {

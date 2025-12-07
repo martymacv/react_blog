@@ -134,17 +134,24 @@ function PostEditor() {
     })
     
     return (
-        <div className='flex flex-col gap-10 w-full m-20'>
+      <div className="flex flex-col my-7 bg-[#202020ff] shadow-simple-post rounded-[12px] w-200">
+        <div className="sticky flex flex-col gap-10 w-200 p-6 bg-[#202020ff] rounded-t-[12px]">
+        {/* <div className='flex flex-col gap-10 w-200 my-7'> */}
             <TipTapEditorToolbar editor={editor} editorState={editorState}/>
             {/* <TipTapFloatingMenu editor={editor} editorState={editorState}/> */}
             <TipTapBubleMenu editor={editor} editorState={editorState}/>
-            <EditorContent editor={editor}/>
+            
+        </div>
+        <EditorContent editor={editor}/>
+        <div className="flex flex-col gap-10 w-200 p-6">
             <section className='section'>
                 <ActionButton>Сохранить</ActionButton>
                 <ActionButton>Опубликовать</ActionButton>
             </section>
             
+        {/* </div> */}
         </div>
+      </div>
     )
 }
 

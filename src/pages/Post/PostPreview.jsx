@@ -3,8 +3,10 @@ import { EditorContent, useEditor } from "@tiptap/react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom"
 import { extensions } from "../../constants/tipTapExtensions";
+import { useGlobalState } from '../../components/GlobalProvider';
 
-function NormalPost({ poster, title, textPreview, postedDate, tags, linkName, linkTo }) {
+function PostPreview({ poster, title, textPreview, postedDate, tags, linkName, linkTo, post }) {
+    const { setSelectedPost } = useGlobalState();
     const [postPreview, setPostPreview] = useState('');
 
     const editor = useEditor({
@@ -37,26 +39,24 @@ function NormalPost({ poster, title, textPreview, postedDate, tags, linkName, li
                     <p className="font-roboto text-[#d2d2d2ff] font-[400] text-[14px] leading-[21px] tracking-[0%]">
                         {postPreview.length > 300 ? `${postPreview.slice(0, 300)}...` : postPreview}
                     </p>
-                    <div className='flex flex-col'>
+                    <div className="flex md:flex-row flex-col gap-3 justify-between">
                         <div className="flex flex-row flex-wrap gap-x-3 items-center">
-                            <span className="font-lato text-[#828282ff] text-[12px] font-[400]">
-                                опубликовано - {postedDate}</span>
-                                <div className="w-[6px] h-[6px] bg-white rounded-full"></div>
-
-                        </div>
-                        <div className="flex md:flex-row flex-col gap-3 justify-between">
                             <div className="flex flex-row flex-wrap gap-x-3 items-center">
-                                {tags.map( (tag) => (
-                                    <Link
-                                        className="font-roboto text-[#107effff] text-[14px] hover:font-black">
-                                        {tag}</Link>
-                                ))}
+                                <span className="font-lato text-[#828282ff] text-[12px] font-[400]">
+                                    опубликовано - {postedDate}</span>
+                                    <div className="w-[6px] h-[6px] bg-white rounded-full"></div>
                             </div>
-                            <Link to={linkTo}
-                                className="font-roboto text-[#107effff] text-[14px] font-[400] hover:font-black">
-                                    {linkName}
-                            </Link>
+                            {tags.map( (tag) => (
+                                <Link
+                                    className="font-roboto text-[#107effff] text-[12px] hover:font-black">
+                                    {tag}</Link>
+                            ))}
                         </div>
+                        <Link to={linkTo}
+                            onClick={() => setSelectedPost(post)}
+                            className="font-roboto text-[#107effff] text-[14px] font-[400] hover:font-black">
+                                {linkName}
+                        </Link>
                     </div>
                 </div>
             </div>
@@ -64,4 +64,4 @@ function NormalPost({ poster, title, textPreview, postedDate, tags, linkName, li
     )
 }
 
-export default NormalPost
+export default PostPreview

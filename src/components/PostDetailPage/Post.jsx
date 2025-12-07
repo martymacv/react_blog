@@ -3,7 +3,8 @@ import Comments from "../singles/Comments"
 
 function Post() {
     return (
-        <div className="flex flex-col w-full my-7 px-12 rounded-t-md">
+        // <div className="flex flex-col w-full my-7 px-12 rounded-t-md">
+        <div className="flex flex-col my-7 rounded-t-md w-200">
             <div className="flex flex-col gap-3 p-6 bg-[#202020ff] rounded-b-md shadow-simple-post">
                 <nav className="flex flex-row justify-between">
                     <Link to={"/"}

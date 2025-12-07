@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react"
+import { API_BASE_URL } from "../../constants";
 
 function ProtectedImage({ src, alt, className, fallback }) {
     const [imageUrl, setImageUrl] = useState('');
@@ -7,11 +8,13 @@ function ProtectedImage({ src, alt, className, fallback }) {
     const abortControllerRef = useRef(null);
 
     useEffect(() => {
+        console.log(src)
+        if (!src) {
+            throw new Error();
+        }
+
         async function fetchImage() {
-            if (!src) {
-                return;
-            }
-        
+
             if (abortControllerRef.current) {
                 abortControllerRef.current.abort();
             }
@@ -22,7 +25,6 @@ function ProtectedImage({ src, alt, className, fallback }) {
         
             try {
                 const token = localStorage.getItem('auth:accessToken');
-                console.log(token)
                 const response = await fetch(
                     src,
                     {

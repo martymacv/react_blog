@@ -62,20 +62,52 @@ export const API_ENDPOINTS = {
   },
   USERS: {
     LIST: '/api/users/',
-    PROFILE: (profileId) => `/profiles/${profileId}/`,
+    PROFILE: {
+      GET: (profileId) => `/profiles/${profileId}/get/`,
+      UPDATE: (profileId) => `/profiles/${profileId}/update/`,
+    },
     MEDIA: '/profiles/media',
   },
   POSTS: {
-    LIST: '/api/posts/',
-    DETAIL: `/api/posts/:id/`,
+    LIST: '/posts/',
+    DETAIL: (postId) => `/posts/${postId}/`,
+    EDITOR: '/post-editor/'
+  },
+  PROFILES: {
+    PERMISSIONS: (userId) => `/permissions/${userId}`
   }
 };
+
+export const LINKS = {
+  HOME: '/',
+  LOGIN: '/login',
+  REGISTER: '/registration',
+  PROFILES: {
+    LIST: '/profiles/',
+    DETAIL: (profileId) => `/profiles/${profileId}/`,
+    EDITOR: (profileId) => `/profiles/${profileId}/`,
+  },
+  POSTS: {
+    LIST: '/posts/',
+    DETAIL: '/posts/:postId/',
+    EDITOR: '/post-editor/',
+  }
+}
 
 export const ROUTES = {
   HOME: '/',
   LOGIN: '/login',
   REGISTER: '/registration',
-  PROFILE: '/profile',
+  PROFILES: {
+    LIST: '/profiles/',
+    DETAIL: '/profiles/:profileId/',
+    EDITOR: '/profiles/:profileId/'
+  },
+  POSTS: {
+    LIST: '/posts/',
+    DETAIL: '/posts/:postId/',
+    EDITOR: '/post-editor/',
+  }
 };
 
 export const STORAGE_KEYS = {

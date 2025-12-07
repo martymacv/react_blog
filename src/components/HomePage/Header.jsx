@@ -4,16 +4,21 @@ import { useEffect, useState } from "react";
 
 import Input from "../singles/Input"
 import { useGlobalState } from "../GlobalProvider";
-import { API_ENDPOINTS } from "../../constants";
+import { LINKS } from "../../constants";
+import { ROUTES } from "../../constants";
 
 function Header() {
     const actionData = useActionData();
     const [searchParams, setSearchParams] = useSearchParams()
     const navigate = useNavigate();
+    const location = useLocation();
+
+    console.log(location)
 
     const {
         userId,
-        logStatus
+        logStatus,
+        selectedPost
     } = useGlobalState();
     // const hasToken = localStorage.getItem('refresh_token')
     
@@ -47,22 +52,45 @@ function Header() {
     // }
 
     return (
-        <div className="flex flex-row justify-between items-center p-4 bg-[#0d0d0dff] shadow-header">
+        <div className="flex flex-row justify-between items-center p-4 bg-[#0d0d0dff] shadow-header rounded-[12px]">
             <nav className='header'>
-                <ul className="flex flex-row flex-wrap gap-6">
+                <ul className="flex flex-row flex-wrap gap-6 justify-center items-center">
                     <li className="text-white text-[11px] font-[400] font-roboto uppercase">
-                        <NavLink>
-                            Главное
+                        <NavLink to='/'>
+                            Главная
                         </NavLink>
                     </li>
                     <li className="text-white text-[11px] font-[400] font-roboto uppercase">
-                        <NavLink>
-                            Обо мне
+                        <NavLink to={LINKS.PROFILES.DETAIL(localStorage.getItem('auth:userId'))}>
+                            Мой Профиль
                         </NavLink>
                     </li>
                     <li className="text-white text-[11px] font-[400] font-roboto uppercase">
-                        <NavLink to={API_ENDPOINTS.USERS.PROFILE(localStorage.getItem('auth:userId'))}>
-                            Профиль
+                        <NavLink to='//'>
+                            Подписки
+                        </NavLink>
+                    </li>
+                </ul>
+            </nav>
+            <ul className="flex flex-row flex-wrap gap-6 justify-center items-center">
+                {/\/post\/[/d]*/.test(location.pathname) &&
+                    <li className="text-white text-[14px] font-[900] font-roboto uppercase">
+                        {`${selectedPost.title.length > 20 ? `${selectedPost.title.slice(0, 10)}...` : selectedPost.title}`}
+                    </li>
+                }
+            </ul>
+            <nav className='header'>
+                <ul className="flex flex-row flex-wrap gap-6 justify-center items-center">
+                    <li className="text-white text-[11px] font-[400] font-roboto uppercase">
+                        <NavLink to={ROUTES.POSTS.EDITOR}>
+                            Создать статью
+                        </NavLink>
+                    </li>
+                    <li className="text-white text-[11px] font-[400] font-roboto uppercase">
+                        <NavLink to={`/search${searchParams ? '?' : ''}${searchParams}`} 
+                        // className="text-white text-[11px] font-[400] font-roboto uppercase"
+                            >
+                            Найти
                         </NavLink>
                     </li>
                     <li className="text-white text-[11px] font-[400] font-roboto uppercase">
@@ -77,10 +105,7 @@ function Header() {
                     </li>
                 </ul>
             </nav>
-            <NavLink to={`/search${searchParams ? '?' : ''}${searchParams}`} 
-                className="text-white text-[11px] font-[400] font-roboto uppercase">
-                Поиск
-            </NavLink>
+            
         </div>
     )
 }

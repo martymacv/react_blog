@@ -2,7 +2,7 @@ import { API_BASE_URL, API_DATA, API_ENDPOINTS } from "../constants";
 
 export async function profileLoader() {
     const response = await fetch(
-        `${API_BASE_URL}${API_ENDPOINTS.USERS.PROFILE(localStorage.getItem('auth:userId'))}`,
+        `${API_BASE_URL}${API_ENDPOINTS.USERS.PROFILE.GET(localStorage.getItem('auth:userId'))}`,
         API_DATA("GET")
     );
 

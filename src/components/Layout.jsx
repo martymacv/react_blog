@@ -14,14 +14,14 @@ function Layout() {
   return (
     // <div id="header"className="flex flex-row min-h-screen min-w-[680px] max-w-[1000px] bg-[#181818ff]">
     <div id="header" className="flex flex-row min-h-screen w-full bg-[#181818ff]">
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col gap-7 w-full">
             <header className='sticky'>
                 <Header/>
             </header>
             <aside className={`${profileStatus !== 'new' && 'hidden'}`}>
               <Sidebar/>
             </aside>
-            <main className="main">
+            <main className="main mb-7">
               <Outlet className="w-full"/>
             </main>
             

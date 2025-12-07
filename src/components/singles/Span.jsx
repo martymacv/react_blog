@@ -7,12 +7,12 @@ function Span({ children, variant = "primary", ...props }) {
     }
 
     return (
-        <h1
+        <span
             className={`${baseStyles} ${variants[variant]}`}
             { ...props }
             >
             {children}
-        </h1>
+        </span>
     )
 }
 

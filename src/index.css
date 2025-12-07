@@ -24,13 +24,17 @@
   --text-button--line-height: 100%;
   --text-button--letter-spacing: 0%;
   /* --shadow-sidebar: 5px 0px 15px 0px rgba(5, 5, 5, 0.1); */
-  --shadow-sidebar: 0px 0px 15px 1px #dededeff;
+  --shadow-sidebar: 0px 0px 15px 3px #dedede33;
   /* --shadow-header: 0px 5px 22px 0px rgba(0, 0, 0, 0.25); */
-  --shadow-header: 0px 0px 15px 1px #dededeff;
-  --shadow-add-post: 0px 15px 25px 0px rgba(0, 0, 0, 0.45);
-  --shadow-simple-post: 0px 15px 25px 0px rgba(0, 0, 0, 0.35);
-  --shadow-pagenav-base: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+  --shadow-header: 0px 0px 15px  3px #dedede33;
+  /* --shadow-add-post: 0px 15px 25px 0px rgba(0, 0, 0, 0.45); */
+  --shadow-add-post: 0px 0px 15px 3px #dedede33;
+  /* --shadow-simple-post: 0px 15px 25px 0px rgba(0, 0, 0, 0.35); */
+  --shadow-simple-post: 0px 0px 15px  3px #dedede33;
+  /* --shadow-pagenav-base: 0px 0px 10px 0px rgba(0, 0, 0, 0.15); */
+  --shadow-pagenav-base: 0px 0px 15px 1px #dedede55;
   --shadow-pagenav-selected: 0px 0px 10px 0px rgba(58, 108, 234, 0.15);
+  /* --shadow-pagenav-selected: 0px 0px 15px 1px #dedede55; */
 }
 
 :root {
@@ -42,6 +46,11 @@ body {
     display: flex;
     justify-content: center;
     background-color: #181818ff;
+}
+
+nav a.active {
+  font-size: 14px;
+  font-weight: 900;
 }
 
 .sticky {
@@ -74,10 +83,11 @@ div::-webkit-scrollbar {
 
 .form {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 20px;
     /* min-width: 200px; */
-    width: 300px;
+    width: 800px;
+    padding: 12px;
 }
 
 .section {
@@ -89,7 +99,7 @@ div::-webkit-scrollbar {
 .main {
     display: flex;
     justify-content: center;
-    margin: 48px;
+    /* margin: 48px; */
 }
 
 /* Дополнительные стили для лучшего внешнего вида */
@@ -109,7 +119,7 @@ div::-webkit-scrollbar {
   /* Рекомендуемые дополнения */
   outline: none;
   border: 1px solid #333;
-  border-radius: 4px;
+  border-radius: 12px;
   margin: 0;
 }
 
