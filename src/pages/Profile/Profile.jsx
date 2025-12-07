@@ -157,9 +157,9 @@ function UserProfile() {
                 </section>
                 <section className='flex flex-col w-75 gap-5'>
                     <Span variant="primary">Изображения</Span>
-                    <Avatar src={`${API_BASE_URL}${avatar}`}
+                    <Avatar src={`${avatar}`}
                         changeAvatar={handleAvatar}/>
-                    <Wallpaper src={`${API_BASE_URL}${wallpaper}`}
+                    <Wallpaper src={`${wallpaper}`}
                         changeWallpaper={handleWallpaper}/>
                 </section>
             </div>
