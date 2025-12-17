@@ -18,7 +18,7 @@ function Home() {
   const title = 'title';
   const post = 'post';
   const published_at = '2025-12-12';
-  if (loaderData?.data.length) {
+  if (loaderData?.data?.length) {
     const {
       id, title, post, status, published_at, created_at, updated_at, deleted_at, is_blocked, is_deleted, author, tag_names
     } = loaderData.data[0];

@@ -57,7 +57,7 @@ function EducationLevel({
         if (error) {
             return <div>Render faild with error: {error}</div>
         }
-        if (educationLevels && Object.keys(educationLevels).length > 0) {
+        if (educationLevels && Object.keys(educationLevels)?.length > 0) {
             return Object.entries(educationLevels).map(([key, value]) => 
                 <SimpleCheckBox
                     selectedValue={educationLevels[userEducationLevel]}

@@ -103,7 +103,7 @@ function Header() {
             <ul className="flex flex-row flex-wrap gap-6 justify-center items-center">
                 {/\/post\/[/d]/.test(location.pathname) &&
                     <li className="text-white text-[14px] font-[900] font-roboto uppercase">
-                        {`${currentLocation?.length > 20 ? `${currentLocation.slice(0, 10)}...` : currentLocation}`}
+                        {`${currentLocation && currentLocation?.length > 20 ? `${currentLocation.slice(0, 10)}...` : currentLocation}`}
                     </li>
                 }
             </ul>

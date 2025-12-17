@@ -266,7 +266,7 @@ export const useLanguage = (profile) => {
         /**
          * Обрабатка выбранного языка
          */
-        if (selectedLanguage && profile && Object.keys(allLanguages).length > 0) {
+        if (selectedLanguage && profile && Object.keys(allLanguages)?.length > 0) {
             console.log('Selected language changed:', selectedLanguage);
 
             // Поиск ключа языка по значению

@@ -35,7 +35,7 @@ function NormalPost({ poster, title, textPreview, postedDate, tags, linkName, li
                     <h6 className="font-roboto text-white text-[18px] font-[500]">
                         {title}</h6>
                     <p className="font-roboto text-[#d2d2d2ff] font-[400] text-[14px] leading-[21px] tracking-[0%]">
-                        {postPreview.length > 300 ? `${postPreview.slice(0, 300)}...` : postPreview}
+                        {postPreview && postPreview?.length > 300 ? `${postPreview.slice(0, 300)}...` : postPreview}
                     </p>
                     <div className='flex flex-col'>
                         <div className="flex flex-row flex-wrap gap-x-3 items-center">

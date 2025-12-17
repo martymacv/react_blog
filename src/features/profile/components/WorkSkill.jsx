@@ -29,7 +29,8 @@ function WorkSkill() {
         if (isUpdating) {
             return <div>Skill updating...</div>
         }
-        if (status404 || !userSkills || userSkills.length === 0) {
+
+        if (status404 || !userSkills || userSkills?.length === 0) {
             return <div>Ничего нет...</div>
         }
         if (error ) {

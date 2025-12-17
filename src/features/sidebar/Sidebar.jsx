@@ -96,15 +96,15 @@ export default function Sidebar() {
         return <p className='text-[#dededeff]'>Failed to fetch data. Please try again!</p>
     }
 
-    console.log(`sidebar - ${state.profile.wallpaper}`);
-    console.log(`sidebar - ${location.pathname}`);
+    console.log(`sidebar - ${state?.profile?.wallpaper}`);
+    console.log(`sidebar - ${location?.pathname}`);
     console.log(`sidebar - ${showUserbar}`);
     return (
         <>
         <div className={styles.sidebox} hidden={showUserbar}>
             
             <ProtectedImage
-                src={state.profile.wallpaper ? `${state.profile.wallpaper}` : ''}
+                src={state?.profile?.wallpaper ? `${state.profile.wallpaper}` : ''}
                 alt="wallpaper"
                 className={`${styles.wallpaper} ${'object-center'}`}
                 fallback={defaultWallpaper}
@@ -135,7 +135,7 @@ export default function Sidebar() {
                         <div className='flex items-center justify-center'>
                             {state.profile.full_desc !== '*****' &&
                                 <p className='text-white text-[12px] font-normal leading-[18px] tracking-[0%] text-center font-roboto'>
-                                    {state.profile.full_desc && state.profile.full_desc.length > 100
+                                    {state?.profile?.full_desc && state?.profile?.full_desc?.length > 100
                                         ? `${state.profile.full_desc.slice(0, 100)}...`
                                         : state.profile.full_desc}
                                 </p>

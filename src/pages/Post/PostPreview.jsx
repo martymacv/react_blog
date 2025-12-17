@@ -46,7 +46,7 @@ function PostPreview({ poster, title, textPreview, postedDate, tags, linkName, l
                     <h6 className="font-roboto text-white text-[18px] font-[500]">
                         {title}</h6>
                     <p className="font-roboto text-[#d2d2d2ff] font-[400] text-[14px] leading-[21px] tracking-[0%]">
-                        {postPreview?.length > 300 ? `${postPreview.slice(0, 300)}...` : postPreview}
+                        {postPreview && postPreview?.length > 300 ? `${postPreview.slice(0, 300)}...` : postPreview}
                     </p>
                     <div className="flex md:flex-row flex-col gap-3 justify-between">
                         <div className="flex flex-row flex-wrap gap-x-3 items-center">

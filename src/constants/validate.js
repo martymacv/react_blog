@@ -13,7 +13,7 @@ export const PASSWORD_REQUIREMENTS = [
         type: "min_length",
         short_msg: `Длина пароля - 8 символов`,
         message: `Пароль должен быть не менее 8 символов`,
-        validate: (pwd) => pwd.length >= 8,
+        validate: (pwd) => pwd && pwd?.length >= 8,
         required: true
     },
     {

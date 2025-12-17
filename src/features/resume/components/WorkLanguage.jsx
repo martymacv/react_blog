@@ -30,7 +30,7 @@ function WorkLanguage() {
         
         const values = Object.values(userLanguages);
         console.log(values)
-        if (values.length === 0) {
+        if (!values || values.length === 0) {
             return <div>Список языков пуст</div>;
         }
         
@@ -59,15 +59,15 @@ function WorkLanguage() {
             return <div>Нет данных о языках</div>;
         }
         
-        const values = Object.entries(allLanguages);
+        const entries = Object.entries(allLanguages);
 
-        if (values.length === 0) {
+        if (!entries || entries?.length === 0) {
             return <div>Список языков пуст</div>;
         }
         
         return (
             <ul className={`flex flex-row flex-wrap ${styles.li}`}>
-                {Object.entries(allLanguages).map(([key, value]) => (
+                {entries.map(([key, value]) => (
                     <li key={`lang${key}`}>
                         <SimpleCheckBox
                             activeStatus={true}

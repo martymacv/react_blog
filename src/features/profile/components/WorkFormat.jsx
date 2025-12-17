@@ -36,12 +36,13 @@ function WorkFormat({
     const renderWorkFormats = () => {
         if (isLoading) return <div>Загрузка...</div>;
         if (error) return <div>Ошибка: {error}</div>;
-        if (!workFormats || Object.keys(workFormats).length === 0) {
+
+        const values = Object.entries(workFormats);
+        if (!values || values?.length === 0) {
             return <div>Нет данных</div>;
         }
 
-        return Object.entries(workFormats)
-            .filter(([key, value]) => key !== 'id') // фильтруем id
+        return values.filter(([key, value]) => key !== 'id') // фильтруем id
             .map(([key, value]) => (
             <SimpleCheckBox
                 activeStatus={value}

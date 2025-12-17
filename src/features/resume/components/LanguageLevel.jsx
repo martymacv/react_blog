@@ -26,15 +26,19 @@ function LanguageLevel({ language }) {
         if (error) {
             return <div>Render faild with error: {error}</div>
         }
-        if (allLanguageLevels && Object.keys(allLanguageLevels).length > 0) {
-            return Object.entries(allLanguageLevels).map(([key, value]) => 
-                <SimpleCheckBox
-                    selectedValue={languageLevel.level}
-                    currentField={key}
-                    checkboxValue={key}
-                    fetchFunc={updateSelectedLevel}/>
-            )
+
+        const entries = Object.entries(allLanguageLevels);
+        if (!entries || entries?.length === 0) {
+            return <div>Ничего нет...</div>
         }
+
+        return entries.map(([key, value]) => 
+            <SimpleCheckBox
+                selectedValue={languageLevel.level}
+                currentField={key}
+                checkboxValue={key}
+                fetchFunc={updateSelectedLevel}/>
+        )
     }
 
     return (

@@ -60,7 +60,7 @@ function Input({
                     </div> */}
                 </div>
             </div>
-            {requirements.length ? (<ul>
+            {requirements && requirements?.length ? (<ul>
                 {requirements.map((req) => (
                     <li className={
                         fieldValue ? (
